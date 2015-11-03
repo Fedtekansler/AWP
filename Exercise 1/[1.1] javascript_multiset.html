@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1 - #1 Multiset</title>
+</head>
+<body>
+	<h1>Exercise 1 - #1 Multiset</h1>
+
+	<h3>Test adding</h3>
+	<input type="text" name="add" value="element"> 
+	<input type="text" name="addOccurences" value="1"> 
+	<button type="button" onclick="add(document.getElementsByName('add')[0].value, document.getElementsByName('addOccurences')[0].value);">Add!</button>
+	<input type="text" name="addOutput" value="Output add">
+	<h5>Also check the console for the contents of the set.</h5>
+
+	<h3>Test removing</h3>
+	<input type="text" name="remove" value="element"> 
+	<input type="text" name="removeOccurences" value="1"> 
+	<button type="button" onclick="removeIt(document.getElementsByName('remove')[0].value, document.getElementsByName('removeOccurences')[0].value);">Remove!</button>
+	<input type="text" name="removeOutput" value="Output remove">
+	<h5>Also check the console for the contents of the set.</h5>
+
+	<h3>Test count</h3>
+	<input type="text" name="count" value="element"> 
+	<button type="button" onclick="count(document.getElementsByName('count')[0].value);">Count!</button>
+	<input type="text" name="countOutput" value="Output count">
+
+	<h3>Test contains</h3>
+	<input type="text" name="contains" value="element"> 
+	<button type="button" onclick="contains(document.getElementsByName('contains')[0].value);">Contains!</button>
+	<input type="text" name="containsOutput" value="Output contains">
+</body>
+</html>
+
+<script type="text/javascript">
+	var multiset = [];
+
+	function add(element, occurences) {	
+		// Return if 0 occurences should be added.
+		if (occurences == 0) { 
+			return;
+		}
+
+		// If only one occurence should be added if will be used.
+		if (typeof occurences === 'undefined') {
+			multiset.push(document.getElementsByName("add")[0].value);				
+		} else {
+			for (var i = 1; i <= occurences; i++) {
+				multiset.push(document.getElementsByName("add")[0].value);
+			};
+		}
+
+		document.getElementsByName("addOutput")[0].value = "true";
+		console.log('Adding');
+		console.log(multiset);
+		return true;
+	}
+
+	// Trying to call remove from HTML removes the button. Therefore the namechange.
+	function removeIt(element, occurences) {
+		var idx = multiset.indexOf(element);
+
+		// Return if 0 occurences should be added.
+		if (occurences == 0) { 
+			return;
+		}
+
+		// -1 is the index for does not exist. 
+		if (typeof occurences === 'undefined') {
+			multiset.splice(idx, 1);			
+		} else {
+			for (var i = 1; i <= occurences; i++) {
+				if (idx != -1) {
+					multiset.splice(idx, 1);						
+				}
+				idx = multiset.indexOf(element);
+			};
+		}	
+
+		document.getElementsByName("removeOutput")[0].value = "true";
+		console.log('Removing');
+		console.log(multiset);
+		return true;
+	}
+
+	function count(element) {
+		var count = 0;
+
+		if (typeof element === 'undefined') {
+			return;
+		} 
+
+		for (var i = 0; i <= multiset.length - 1; i++) {
+			if (checkElement(element, multiset[i])) {
+				count++;
+			} 
+		}
+
+		document.getElementsByName("countOutput")[0].value = count;
+		return count;
+	}
+
+	function contains(element) {
+		var checkedElement = false;
+
+		if (typeof element === 'undefined') {
+			return;
+		}
+
+		for (var i = 0; i <= multiset.length - 1; i++) {
+			if (checkElement(element, multiset[i])) {
+				checkedElement = true;
+			} 
+		}
+
+		document.getElementsByName("containsOutput")[0].value = checkedElement;
+		return checkedElement; 
+	}
+
+	function checkElement(element, value) {
+		if (element == value) {
+			return true;
+		}
+	}	
+</script>
