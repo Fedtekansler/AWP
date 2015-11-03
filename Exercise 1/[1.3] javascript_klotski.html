@@ -87,9 +87,10 @@
 			console.log("Clicked on tile ", divElement);
 		}
 		
-		// Start things..
+		// Add keypress listener to page
 		document.body.addEventListener("keypress", handleKeypress);
 		var tiles = document.getElementsByClassName("tile");
+		// Add click listeners to tiles.
 		for(var i = 0; i < tiles.length; i++){
 			tiles[i].addEventListener("click", handleTileClick);
 		}
