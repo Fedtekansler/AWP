@@ -25,26 +25,29 @@
 <script type="text/javascript">
 	var toppings = ["sprinkles", "chocolate chips", "strawberry syrup", "banana flakes", "caramel sauce"];
 
+	// Construct object like this {"sprinkles": true, "chocolate chips": false, ...}
+	// based on whether the topping has been picked
 	function readToppings(){
 		var res = {};
-		for(var i = 0; i < toppings.length; i++){
+		for(var i = 0; i < toppings.length; i++)
 			res[toppings[i]] = document.getElementsByName(toppings[i])[0].checked;
-		}
 		return res;
 	}
 
+	// Check constraints, display error messages and return true if no constraints violated, false otherwise.
 	function checkConstraints(doAlert){
 		var success = true;
 		var chosenToppings = readToppings();
 		if(chosenToppings["strawberry syrup"] && chosenToppings["caramel sauce"]){
-			document.getElementById("error-strawberry-caramel").style.display="block";
+			document.getElementById("error-strawberry-caramel").style.display="block"; // Show error
 			success = false;
 		}
 		else{
-			document.getElementById("error-strawberry-caramel").style.display="none";
+			document.getElementById("error-strawberry-caramel").style.display="none"; // Hide error
 		}
 		
-		var toppingCount = toppings.reduce(
+		// Count picked toppings
+		var toppingCount = toppings.reduce( // reduce is basically a fold
 			function(sum, topping){return sum+(chosenToppings[topping] ? 1 : 0);}
 			, 0);
 		if(toppingCount > 3){
