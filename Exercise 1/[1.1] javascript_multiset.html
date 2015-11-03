@@ -27,7 +27,7 @@
 
 	<h3>Test contains</h3>
 	<input type="text" name="contains" value="element"> 
-	<button type="button" onclick="containsIt(document.getElementsByName('contains')[0].value);">Contains!</button>
+	<button type="button" onclick="contains(document.getElementsByName('contains')[0].value);">Contains!</button>
 	<input type="text" name="containsOutput" value="Output contains">
 
 	<h3>Test forEach</h3>
@@ -51,10 +51,10 @@
 
 		// If only one occurence should be added if will be used.
 		if (typeof occurences === 'undefined') {
-			multiset.push(document.getElementsByName("add")[0].value);				
+			multiset.push(element);				
 		} else {
 			for (var i = 1; i <= occurences; i++) {
-				multiset.push(document.getElementsByName("add")[0].value);
+				multiset.push(element);
 			};
 		}
 
@@ -108,7 +108,7 @@
 		return count;
 	}
 
-	function containsIt(element) {
+	function contains(element) {
 		var checkedElement = false;
 
 		if (typeof element === 'undefined') {
@@ -149,9 +149,12 @@
 		// Run through the array and count the elements. When a new element is encountered the element is saved into a new array.
 		for (var i = 0; i <= temp.length - 1; i++) {
 			if (temp[i] != temp[i+1]) {
-				// Count the entries. If i is 0 or 1, we add one, as we know that there is atleast one occurence, when we enter if loop. 
+				/* 
+				* Count the entries. If i is 0 or 1, we add one, as we know that there is atleast one occurence, when we enter if loop.
+				* If current element is the same as previous element we increment the counter aswell to make up for starting the index at 0. 
+				*/ 
 				var count = i - lastIndex;
-				if (i == 1 || i == 0) {
+				if (i <= 1 || temp[i] == temp[lastIndex]) {
 					count += 1;
 				}
 				counts.push(count);
