@@ -66,5 +66,33 @@
     <div style="width:400px; height:100px;position: relative; top: 0px;left:0px;margin:0 auto;">
         <div style="width:200px;height:100px;position: relative; left: 100px;background-color: lightgray"></div>
     </div>
+	
+	<script>
+		function handleKeypress(event){
+			console.log("Pressed key ", event.which);
+			switch(event.which){
+				case 119: // W
+					break;
+				case 97: // A
+					break;
+				case 115: // W
+					break;
+				case 100: // W
+					break;
+			}
+		}
+		
+		function handleTileClick(event){
+			var divElement = event.target;
+			console.log("Clicked on tile ", divElement);
+		}
+		
+		// Start things..
+		document.body.addEventListener("keypress", handleKeypress);
+		var tiles = document.getElementsByClassName("tile");
+		for(var i = 0; i < tiles.length; i++){
+			tiles[i].addEventListener("click", handleTileClick);
+		}
+	</script>
 </body>
 </html>
