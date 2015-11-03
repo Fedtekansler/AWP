@@ -27,8 +27,15 @@
 
 	<h3>Test contains</h3>
 	<input type="text" name="contains" value="element"> 
-	<button type="button" onclick="contains(document.getElementsByName('contains')[0].value);">Contains!</button>
+	<button type="button" onclick="containsIt(document.getElementsByName('contains')[0].value);">Contains!</button>
 	<input type="text" name="containsOutput" value="Output contains">
+
+	<h3>Test forEach</h3>
+	<button type="button" onclick="helpForEach()">ForEach!</button>
+	<h5>This will call foreach with the add function (adding all elements to itself)</h5>
+
+	<h3>Test toString</h3>
+	<button type="button" onclick="toStringIt()">toString!</button>
 </body>
 </html>
 
@@ -100,7 +107,7 @@
 		return count;
 	}
 
-	function contains(element) {
+	function containsIt(element) {
 		var checkedElement = false;
 
 		if (typeof element === 'undefined') {
@@ -115,6 +122,50 @@
 
 		document.getElementsByName("containsOutput")[0].value = checkedElement;
 		return checkedElement; 
+	}
+
+	function forEach(functionName) {
+		var startLength = multiset.length - 1;
+		for (var i = 0; i <= startLength; i++) {
+			functionName(multiset[i]);
+		}
+	}
+
+	function toStringIt() {
+		var res = "[";
+		var temp = multiset.slice();
+		var startLength = temp.length - 1;
+		for (var i = 0; i <= startLength; i++) {			
+			res += temp[i];
+			var count = countIt(temp[i]);
+			
+			if (count != 1) {
+				res += " x ";
+				res += count;		
+			}	
+
+			var idx = temp.indexOf(temp[i]);
+			for (var k = 1; k <= count; k++) {
+				if (idx != -1) {
+					temp.splice(idx, 1);						
+				}
+				idx = temp.indexOf(temp[i]);
+			};
+
+			if (i != startLength) {
+				res += ", "
+			}			
+		}
+		res += "]";
+		console.log(res);
+	}
+
+	function helpForEach() {
+		forEach(add);
+	}
+
+	function countIt(element) {
+		return count(element);
 	}
 
 	function checkElement(element, value) {
