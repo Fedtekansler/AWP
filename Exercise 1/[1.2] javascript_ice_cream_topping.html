@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1 - #2 Ice Cream Toppings</title>
+</head>
+<body>
+	<h1>Exercise 1 - #2 Ice Cream Toppings</h1>
+
+	<h3>Pick your toppings</h3>
+	<form onsubmit="return checkConstraints(true);">
+		<input type="checkbox" name="sprinkles" value="sprinkles" onclick="checkConstraints();">sprinkles<br>
+		<input type="checkbox" name="chocolate chips" value="chocolate chips" onclick="checkConstraints();">chocolate chips<br>
+		<input type="checkbox" name="strawberry syrup" value="strawberry syrup" onclick="checkConstraints();">strawberry syrup<br>
+		<input type="checkbox" name="banana flakes" value="banana flakes" onclick="checkConstraints();">banana flakes<br>
+		<input type="checkbox" name="caramel sauce" value="caramel sauce" onclick="checkConstraints();">caramel sauce<br>
+		
+		<input type="submit" value="Giv mig min is">
+	</form>
+
+	<h3 style="color:#cc0000;display:none" id="error-strawberry-caramel">You may not choose both strawberry syrup and caramel sauce!</h3>
+	<h3 style="color:#cc0000;display:none" id="error-max-3">Max 3 toppings!</h3>
+</body>
+</html>
+
+<script type="text/javascript">
+	var toppings = ["sprinkles", "chocolate chips", "strawberry syrup", "banana flakes", "caramel sauce"];
+
+	function readToppings(){
+		var res = {};
+		for(var i = 0; i < toppings.length; i++){
+			res[toppings[i]] = document.getElementsByName(toppings[i])[0].checked;
+		}
+		return res;
+	}
+
+	function checkConstraints(doAlert){
+		var success = true;
+		var chosenToppings = readToppings();
+		if(chosenToppings["strawberry syrup"] && chosenToppings["caramel sauce"]){
+			document.getElementById("error-strawberry-caramel").style.display="block";
+			success = false;
+		}
+		else{
+			document.getElementById("error-strawberry-caramel").style.display="none";
+		}
+		
+		var toppingCount = toppings.reduce(
+			function(sum, topping){return sum+(chosenToppings[topping] ? 1 : 0);}
+			, 0);
+		if(toppingCount > 3){
+			document.getElementById("error-max-3").style.display="block";
+			success = false;
+		}
+		else{
+			document.getElementById("error-max-3").style.display="none";
+		}
+		if(doAlert && !success){
+			alert("Ikke snyde :(");
+		}
+		return success;
+	}
+</script>
