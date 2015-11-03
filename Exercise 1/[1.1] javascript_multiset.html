@@ -36,6 +36,7 @@
 
 	<h3>Test toString</h3>
 	<button type="button" onclick="toStringIt()">toString!</button>
+	<input type="text" name="stringOutput" value="Output string" style="width: 500px;">
 </body>
 </html>
 
@@ -132,32 +133,49 @@
 	}
 
 	function toStringIt() {
+		// Start building the string to return.
 		var res = "[";
+		
+		// Copy the array into a temporary array. 
 		var temp = multiset.slice();
-		var startLength = temp.length - 1;
-		for (var i = 0; i <= startLength; i++) {			
-			res += temp[i];
-			var count = countIt(temp[i]);
-			
-			if (count != 1) {
-				res += " x ";
-				res += count;		
-			}	
+		
+		// Sort the elements alphabetically 
+		temp.sort();
+		
+		var elements = [];
+		var counts = [];
+		var lastIndex = 0;
 
-			var idx = temp.indexOf(temp[i]);
-			for (var k = 1; k <= count; k++) {
-				if (idx != -1) {
-					temp.splice(idx, 1);						
+		// Run through the array and count the elements. When a new element is encountered the element is saved into a new array.
+		for (var i = 0; i <= temp.length - 1; i++) {
+			if (temp[i] != temp[i+1]) {
+				// Count the entries. If i is 0 or 1, we add one, as we know that there is atleast one occurence, when we enter if loop. 
+				var count = i - lastIndex;
+				if (i == 1 || i == 0) {
+					count += 1;
 				}
-				idx = temp.indexOf(temp[i]);
-			};
+				counts.push(count);
+				elements.push(temp[i]);
+				lastIndex = i;
+			}
+		} 
 
-			if (i != startLength) {
-				res += ", "
-			}			
+		// Write to the result string with counts, if there exists more than one. Add a comma between each, if another should be added.
+		for (var i = 0; i <= elements.length - 1; i++) {
+			if (counts[i] == 1) {
+				res += elements[i]
+			} else {
+				res += elements[i] + " x " + counts[i];
+			}
+			if (i != (elements.length-1)) {
+				res += ", ";
+			}
 		}
+
 		res += "]";
 		console.log(res);
+		document.getElementsByName("stringOutput")[0].value = res;
+		return res;
 	}
 
 	function helpForEach() {
