@@ -27,7 +27,7 @@
 
 	<h3>Test contains</h3>
 	<input type="text" name="contains" value="element"> 
-	<button type="button" onclick="contains(document.getElementsByName('contains')[0].value);">Contains!</button>
+	<button type="button" onclick="containsIt(document.getElementsByName('contains')[0].value);">Contains!</button>
 	<input type="text" name="containsOutput" value="Output contains">
 
 	<h3>Test forEach</h3>
@@ -108,7 +108,7 @@
 		return count;
 	}
 
-	function contains(element) {
+	function containsIt(element) {
 		var checkedElement = false;
 
 		if (typeof element === 'undefined') {

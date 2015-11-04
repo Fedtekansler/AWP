@@ -22,9 +22,9 @@
 	<h1>Exercise 1 - #3 Klotski</h1>
     
     <p>Load the standard map or try to solve some of the other puzzles.</p>
-    <button type="button" onclick='loadMapJs("standard_map.js")'>Standard</button>
-    <button type="button" onclick='loadMapJs("easy_map.js")'>Easy</button>    
-    <button type="button" onclick='loadMapJs("normal_map.js")'>Normal</button>
+    <button type="button" onclick='loadMap("standard_map.js")'>Standard</button>
+    <button type="button" onclick='loadMap("easy_map.js")'>Easy</button>    
+    <button type="button" onclick='loadMap("normal_map.js")'>Normal</button>
 
     <div id="board">
 
@@ -175,21 +175,8 @@
 			}
 			return true;
 		}
-
-		// Load a map from file (MISS JQUERY AND AJAX)
-		function loadMap(path) {
-			var xhttp = new XMLHttpRequest();
-			xhttp.onload = function() {
-				if (xhttp.readyState == 4) {
-			      document.getElementById("board").innerHTML = xhttp.responseText;
-			      loadListeners();
-			    }
-			}
-			xhttp.open("GET", path, true);
-			xhttp.send();
-		}
 		
-		function loadMapJs(path){
+		function loadMap(path){
 			console.log(path);
 			var script = document.createElement('script');
 			script.src = path;
