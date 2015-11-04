@@ -15,6 +15,7 @@
         .red-big div  {width: 190px;height:190px;background-color:red;}
         .yellow-horizontal div {width: 190px;height:90px;background-color:yellow;}
         .yellow-small div {width: 90px;height:90px;background-color:yellow;}
+        .selected div {background-color: green;}
     </style>
 </head>
 <body style="width:100%;">
@@ -96,7 +97,9 @@
 		}
 		
 		function handleTileClick(event){
+			if (activeTile != null) activeTile.classList.remove("selected");
 			activeTile = this;
+			activeTile.className += " selected";
 			console.log("Active tile ", activeTile);
 			return false;
 		}
