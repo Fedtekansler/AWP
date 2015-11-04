@@ -24,7 +24,8 @@
     <p>Load the standard map or try to solve some of the other puzzles.</p>
     <button type="button" onclick='loadMap("standard_map.html")'>Standard</button>
     <button type="button" onclick='loadMap("easy_map.html")'>Easy</button>    
-    <button type="button" onclick='loadMap("normal_map.html")'>Normal</button>           
+    <button type="button" onclick='loadMap("normal_map.html")'>Normal</button>
+	<button type="button" onclick='loadMapJs("easy_map.js")'>Map from JS file</button>
 
     <div id="board">
 
@@ -187,6 +188,18 @@
 			}
 			xhttp.open("GET", path, true);
 			xhttp.send();
+		}
+		
+		function loadMapJs(path){
+			console.log(path);
+			var script = document.createElement('script');
+			script.src = path;
+			script.onload = function () {
+				console.log(window.map);
+				document.getElementById("board").innerHTML = window.map;
+			    loadListeners();
+			};
+			document.body.appendChild(script);
 		}
 
 		function loadListeners() {
