@@ -105,8 +105,8 @@
 			console.log("Try moving tile", tile, dxPixels, dyPixels);
 			if(tile === null)
 				return false;
-			var x = parseInt(tile.style.left.replace(/px/,""));
-			var y = parseInt(tile.style.top.replace(/px/,""));
+			var x = tile.offsetLeft;
+			var y = tile.offsetTop;
 			var isValid = validateMove(tile, x+dxPixels, y+dyPixels);
 			if(!isValid)
 				return false;
@@ -116,14 +116,28 @@
 		}
 		
 		// Checks that moving the tile to the given position will not result in it intersecting any of the other tiles. True if valid, false otherwise.
-		function validateMove(movingTile, posX, posY){
+		function validateMove(movingTile, movingTileLeft, movingTileTop){
+			var movingTileWidth = movingTile.offsetWidth;
+			var movingTileHeight = movingTile.offsetHeight;
+			var movingTileRight = movingTileLeft+movingTileWidth;
+			var movingTileBottom = movingTileTop+movingTileHeight;
 			for(var i = 0; i < tiles.length; i++){
 				var otherTile = tiles[i];
 				if(otherTile === movingTile) // Allow the moving tile to intersect with itself. durr..
 					continue;
-				var intersects = false; // TODO: compute this
-				if(intersects)
+				var otherTileLeft = otherTile.offsetLeft;
+				var otherTileTop = otherTile.offsetTop;
+				var otherTileWidth = otherTile.offsetWidth;
+				var otherTileHeight = otherTile.offsetHeight;
+				var otherTileRight = otherTileLeft+otherTileWidth;
+				var otherTileBottom = otherTileTop+otherTileHeight;
+				// Compute whether the moved tile intersects with the other tile
+				var intersectsX = movingTileLeft < otherTileRight && otherTileLeft < movingTileRight;
+				var intersectsY = movingTileTop < otherTileBottom && otherTileTop < movingTileBottom;
+				if(intersectsX && intersectsY){
+					console.log("Cannot move", movingTile, "because it intersects with", otherTile);
 					return false;
+				}
 			}
 			return true;
 		}
