@@ -100,17 +100,31 @@
 			return false;
 		}
 		
-		// Attempt to move tile by the given delta pixel amounts
+		// Attempt to move tile by the given delta pixel amounts. Returns true if moved correctly, false otherwise.
 		function tryMoveTile(tile, dxPixels, dyPixels){
 			console.log("Try moving tile", tile, dxPixels, dyPixels);
 			if(tile === null)
 				return false;
 			var x = parseInt(tile.style.left.replace(/px/,""));
 			var y = parseInt(tile.style.top.replace(/px/,""));
-			console.log(x, y);
-			// TODO: check if valid before moving..
+			var isValid = validateMove(tile, x+dxPixels, y+dyPixels);
+			if(!isValid)
+				return false;
 			tile.style.left = (x+dxPixels)+"px";
 			tile.style.top = (y+dyPixels)+"px";
+			return true;
+		}
+		
+		// Checks that moving the tile to the given position will not result in it intersecting any of the other tiles. True if valid, false otherwise.
+		function validateMove(movingTile, posX, posY){
+			for(var i = 0; i < tiles.length; i++){
+				var otherTile = tiles[i];
+				if(otherTile === movingTile) // Allow the moving tile to intersect with itself. durr..
+					continue;
+				var intersects = false; // TODO: compute this
+				if(intersects)
+					return false;
+			}
 			return true;
 		}
 		
