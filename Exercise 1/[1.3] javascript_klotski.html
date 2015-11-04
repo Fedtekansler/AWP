@@ -68,31 +68,60 @@
     </div>
 	
 	<script>
+		/* Global variables --------------------------------------*/
+		var tiles; // tile <div> elements
+		var activeTile = null; // tile <div> element that the user last clicked. Null if none has been clicked
+		
+		/* Functions ---------------------------------------------*/
 		function handleKeypress(event){
-			console.log("Pressed key ", event.which);
 			switch(event.which){
 				case 119: // W
+					console.log("Pressed key W");
+					tryMoveTile(activeTile, 0, -100);
 					break;
 				case 97: // A
+					console.log("Pressed key A");
+					tryMoveTile(activeTile, -100, 0);
 					break;
-				case 115: // W
+				case 115: // S
+					console.log("Pressed key S");
+					tryMoveTile(activeTile, 0, 100);
 					break;
-				case 100: // W
+				case 100: // D
+					console.log("Pressed key D");
+					tryMoveTile(activeTile, 100, 0);
 					break;
 			}
 		}
 		
 		function handleTileClick(event){
-			var divElement = event.target;
-			console.log("Clicked on tile ", divElement);
+			console.log(event)
+			activeTile = event.target || event.srcElement; // TODO: this gives the wrong element
+			console.log("Active tile ", activeTile);
+			return false;
 		}
 		
+		// Attempt to move tile by the given delta pixel amounts
+		function tryMoveTile(tile, dxPixels, dyPixels){
+			console.log("Try moving tile", tile, dxPixels, dyPixels);
+			if(tile === null)
+				return false;
+			//var x = tile.style.left;
+			//var y = tile.style.top;
+			// TODO: check if valid before moving..
+			tile.style.left += dxPixels;
+			tile.style.top += dyPixels;
+			return true;
+		}
+		
+		/* Setup things ------------------------------------------*/
 		// Add keypress listener to page
 		document.body.addEventListener("keypress", handleKeypress);
-		var tiles = document.getElementsByClassName("tile");
+		tiles = document.getElementsByClassName("tile");
 		// Add click listeners to tiles.
 		for(var i = 0; i < tiles.length; i++){
 			tiles[i].addEventListener("click", handleTileClick);
+			console.log(tiles[i]);
 		}
 	</script>
 </body>
