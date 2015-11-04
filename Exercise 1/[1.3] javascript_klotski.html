@@ -64,13 +64,14 @@
     </div>
 
     <div style="width:400px; height:100px;position: relative; top: 0px;left:0px;margin:0 auto;">
-        <div style="width:200px;height:100px;position: relative; left: 100px;background-color: lightgray"></div>
+        <div style="width:200px;height:100px;position: relative; left: 100px;background-color: lightgray; z-index:-1"></div> <!-- z-index set to less than that of the red tile to make sure the red til goes on top of the gray one. -->
     </div>
 	
 	<script>
 		/* Global variables --------------------------------------*/
 		var tiles; // tile <div> elements
 		var activeTile = null; // tile <div> element that the user last clicked. Null if none has been clicked
+		var redTile = document.getElementsByClassName("red-big")[0];
 		
 		/* Functions ---------------------------------------------*/
 		function handleKeypress(event){
@@ -115,26 +116,45 @@
 			return true;
 		}
 		
-		// Checks that moving the tile to the given position will not result in it intersecting any of the other tiles. True if valid, false otherwise.
+		function intersects(left1, top1, right1, bottom1, left2, top2, right2, bottom2){
+			var intersectsX = left1 < right2 && left2 < right1;
+			var intersectsY = top1 < bottom2 && top2 < bottom1;
+			return intersectsX && intersectsY;
+		}
+		
+		// Checks that moving the tile to the given position is valid. True if valid, false otherwise.
 		function validateMove(movingTile, movingTileLeft, movingTileTop){
 			var movingTileWidth = movingTile.offsetWidth;
 			var movingTileHeight = movingTile.offsetHeight;
 			var movingTileRight = movingTileLeft+movingTileWidth;
 			var movingTileBottom = movingTileTop+movingTileHeight;
+			
+			// Check that it stays on the board
+			if(movingTileLeft < 0 || movingTileTop < 0 || movingTileRight > 400){
+				console.log("Cannot move", movingTile, "because it would move out of the board");
+				return false;
+			}
+			// Don't allow yellow tiles to move out of the bottom
+			if(movingTile !== redTile && movingTileBottom > 500){
+				console.log("Cannot move", movingTile, "because it would move out of the board");
+				return false;
+			}
+			// Only allow the red tile to move out of the bottom in the center
+			if(movingTile === redTile){
+				if(movingTileBottom > 500 && movingTileLeft != 100 || movingTileBottom > 600){
+					console.log("Cannot move", movingTile, "because it would move out of the board");
+					return false;
+				}
+			}
+			
+			// Check that no other tiles are in the way
 			for(var i = 0; i < tiles.length; i++){
 				var otherTile = tiles[i];
-				if(otherTile === movingTile) // Allow the moving tile to intersect with itself. durr..
+				if(otherTile === movingTile) // Allow the moving tile to intersect with itself. hurr durr..
 					continue;
-				var otherTileLeft = otherTile.offsetLeft;
-				var otherTileTop = otherTile.offsetTop;
-				var otherTileWidth = otherTile.offsetWidth;
-				var otherTileHeight = otherTile.offsetHeight;
-				var otherTileRight = otherTileLeft+otherTileWidth;
-				var otherTileBottom = otherTileTop+otherTileHeight;
 				// Compute whether the moved tile intersects with the other tile
-				var intersectsX = movingTileLeft < otherTileRight && otherTileLeft < movingTileRight;
-				var intersectsY = movingTileTop < otherTileBottom && otherTileTop < movingTileBottom;
-				if(intersectsX && intersectsY){
+				var isIntersecting = intersects(movingTileLeft, movingTileTop, movingTileRight, movingTileBottom, otherTile.offsetLeft, otherTile.offsetTop, otherTile.offsetLeft+otherTile.offsetWidth, otherTile.offsetTop+otherTile.offsetHeight);
+				if(isIntersecting){
 					console.log("Cannot move", movingTile, "because it intersects with", otherTile);
 					return false;
 				}
