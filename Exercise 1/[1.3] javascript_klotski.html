@@ -22,10 +22,9 @@
 	<h1>Exercise 1 - #3 Klotski</h1>
     
     <p>Load the standard map or try to solve some of the other puzzles.</p>
-    <button type="button" onclick='loadMap("standard_map.html")'>Standard</button>
-    <button type="button" onclick='loadMap("easy_map.html")'>Easy</button>    
-    <button type="button" onclick='loadMap("normal_map.html")'>Normal</button>
-	<button type="button" onclick='loadMapJs("easy_map.js")'>Map from JS file</button>
+    <button type="button" onclick='loadMapJs("standard_map.js")'>Standard</button>
+    <button type="button" onclick='loadMapJs("easy_map.js")'>Easy</button>    
+    <button type="button" onclick='loadMapJs("normal_map.js")'>Normal</button>
 
     <div id="board">
 
@@ -205,6 +204,7 @@
 		function loadListeners() {
 			/* Setup things ------------------------------------------*/
 			// Add keypress listener to page
+			activeTile = null;
 			redTile = document.getElementsByClassName("red-big")[0];
 			document.body.addEventListener("keypress", handleKeypress);
 			tiles = document.getElementsByClassName("tile");
