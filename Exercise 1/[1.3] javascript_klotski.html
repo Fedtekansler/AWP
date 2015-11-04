@@ -74,7 +74,7 @@
 		/* Global variables --------------------------------------*/
 		var tiles; // tile <div> elements
 		var activeTile = null; // tile <div> element that the user last clicked. Null if none has been clicked
-		var redTile = document.getElementsByClassName("red-big")[0];
+		var redTile; // The red tile
 		
 		/* Functions ---------------------------------------------*/
 		function handleKeypress(event){
@@ -95,7 +95,10 @@
 					console.log("Pressed key D");
 					tryMoveTile(activeTile, 100, 0);
 					break;
-			} 
+			}
+			if(redTile.offsetTop == 400 && redTile.offsetLeft == 100){
+				alert("Congratulations - you have won the game");
+			}
 		}
 		
 		function handleTileClick(event){
@@ -153,8 +156,8 @@
 			// Only allow the red tile to move out of the bottom in the center
 			if(movingTile.className === redTile.className){
 				if(movingTileBottom > 500 && movingTileLeft != 100 || movingTileBottom > 600){
-					alert("Congratulations - you have won the game");
-					return true;
+					console.log("Cannot move", movingTile, "because it would move out of the board");
+					return false;
 				}
 			}
 			
@@ -189,6 +192,7 @@
 		function loadListeners() {
 			/* Setup things ------------------------------------------*/
 			// Add keypress listener to page
+			redTile = document.getElementsByClassName("red-big")[0];
 			document.body.addEventListener("keypress", handleKeypress);
 			tiles = document.getElementsByClassName("tile");
 			// Add click listeners to tiles.
