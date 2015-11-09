@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <script>
+
+        // Exercise 2.1 - Run and explain code.
+
+        // 1.1
+        foo  = { bar: "AWP" };
+        bar = "bar";
+        foo.undefined = foo[bar];
+        console.log(foo[foo.bar.baz]);
+
+        /**
+         * A variable foo is created with a JSON object containing a key called bar with a value "AWP".
+         * A variable bar is then assigned the string "bar".
+         * The undefined method of the JSON object foo is assigned the value "AWP" by using the bar element in foo by calling foo[bar],
+         * where bar is a string representation of the key bar.
+         * "AWP" is written as output in the fourth line by trying to call foo.bar.baz in foo, which is undefined triggering the undefined clause = "AWP".
+        */
+
+        // 1.2
+        var x = {name:"Foo", gender:"M"};
+        var y = {name:"Bar", gender:"F"};
+        var person2age = {};
+        person2age[x] = 25;
+        person2age[y] = 42;
+        console.log(person2age[x]); // ES6 Maps are nice
+
+        /**
+         * person2age is an empty object. Here you can't assign a JSON object to the empty object.
+         * The age gets inserted as an object in another object, however, it is not inserted as a JSON representation.
+         * So attempting to get an element in it will just yield the first and only element in person2age (the last inserted, which is 42).
+         */
+
+        // 1.3
+        function Msg (m) {
+            this.msg = m;
+            this.number = ++Msg.prototype.counter;
+        }
+        Msg.prototype.counter = 0;
+        Msg.prototype.show = function() {alert("Message number " + this.number + " is: " + this.msg);};
+        var x = new Msg("hello");
+        var y = new Msg("world");
+        x.show(); y.show();
+        console.log(x.counter);
+
+        /**
+         * A function is added that takes a message and saves it and increments the number of messages received. It also keeps track of the message number.
+         * A sub function is added (show) to a message that opens and alert with the message and the number of the message.
+         * Two messages are added: hello and world.
+         * The show function is called on both messages causing two alert messages.
+         * The number of messages are written to the console.
+         */
+
+
+    </script>
+
+</body>
+</html>
