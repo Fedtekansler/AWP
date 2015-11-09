@@ -10,33 +10,42 @@
 </html>
 
 <script type="text/javascript">
-/* Pet class*/
-function Pet(name){
-	var name = name; // "Private" variable since it's only visible in the scope of this constructor
-	this.getName = function(){ return name; }; // Unfortunately the private variable is also not visible from the prototype which means we must define the getter on each object rather than the prototype of the object.
-}
+var pets = (function(){
+	/* Pet class*/
+	function Pet(name){
+		var name = name; // "Private" variable since it's only visible in the scope of this constructor
+		this.getName = function(){ return name; }; // Unfortunately the private variable is also not visible from the prototype which means we must define the getter on each object rather than the prototype of the object.
+	}
 
-/* Dog class*/
-function Dog(name){
-	Pet.call(this, name); // Call superclass "Pet" constructor on this object
-}
-Dog.prototype = new Pet; // Set prototype to a new Pet object to inherit any methods defined on the prototype of Pet or longer up the prototype chain.
-Dog.prototype.sound = function(){
-	return "Wuf";
-}
+	/* Dog class*/
+	function Dog(name){
+		Pet.call(this, name); // Call superclass "Pet" constructor on this object
+	}
+	Dog.prototype = new Pet; // Set prototype to a new Pet object to inherit any methods defined on the prototype of Pet or longer up the prototype chain.
+	Dog.prototype.sound = function(){
+		return "Wuf";
+	}
 
-/* Cat class*/
-function Cat(name){
-	Pet.call(this, name);
-}
-Cat.prototype = new Pet; 
-Cat.prototype.sound = function(){
-	return "Meow";
-}
+	/* Cat class*/
+	function Cat(name){
+		Pet.call(this, name);
+	}
+	Cat.prototype = new Pet; 
+	Cat.prototype.sound = function(){
+		return "Meow";
+	}
+	
+	// Only expose constructor for Dog and Cat (not Pet) from this module.
+	return {
+		Dog: Dog,
+		Cat: Cat
+	}
+})();
 
 /*Try things out*********************************/
-var polle = new Dog("Polle");
-var garfield = new Cat("Garfield");
+var polle = new pets.Dog("Polle");
+var garfield = new pets.Cat("Garfield");
+//var pet = new pets.Pet("Mr. Impossible"); // The Pet constructor is not exposed from "pets" module
 console.log(polle.getName() +" says " + polle.sound()); // Polle says Wuf
 console.log(garfield.getName() +" says " + garfield.sound()); // Garfield says Meow
 
