@@ -10,32 +10,44 @@
 </html>
 
 <script type="text/javascript">
+/* pets module */
 var pets = (function(){
 	/* Pet class*/
 	function Pet(name){
 		var name = name; // "Private" variable since it's only visible in the scope of this constructor
 		this.getName = function(){ return name; }; // Unfortunately the private variable is also not visible from the prototype which means we must define the getter on each object rather than the prototype of the object.
+		Pet.prototype.counter++;
 	}
+	Pet.prototype.counter = 0;
 
 	/* Dog class*/
 	function Dog(name){
 		Pet.call(this, name); // Call superclass "Pet" constructor on this object
 	}
-	Dog.prototype = new Pet; // Set prototype to a new Pet object to inherit any methods defined on the prototype of Pet or longer up the prototype chain.
+	Dog.prototype = Object.create(Pet.prototype); // Set prototype to a new Pet object to inherit any methods defined on the prototype of Pet or longer up the prototype chain.
+	// Doing this instead of Dog.prototype = new Pet; ensures that the Pet constructor isn't actually called here. We merely create a new object that has the prototype of Pet as its prototype.
+	// This can be done in ES3 in the following way (use empty constructor instead of that of Pet):
+	// function T(){};
+	// T.prototype = Pet.prototype;
+	// Dog.prototype = new T();
+	//
+	
 	Dog.prototype.sound = function(){
 		return "Wuf";
 	}
-
+	//Object.freeze(Dog.prototype); // Makes Dog.prototype read-only (disallow changes to methods)
+	//for some reason this has the effect that getName is not added to constructed Dog objects. Dunno why??
+	
 	/* Cat class*/
 	function Cat(name){
 		Pet.call(this, name);
 	}
-	Cat.prototype = new Pet; 
+	Cat.prototype = Object.create(Pet.prototype); 
 	Cat.prototype.sound = function(){
 		return "Meow";
 	}
 	
-	// Only expose constructor for Dog and Cat (not Pet) from this module.
+	/* Public interface of module */
 	return {
 		Dog: Dog,
 		Cat: Cat
@@ -49,4 +61,11 @@ var garfield = new pets.Cat("Garfield");
 console.log(polle.getName() +" says " + polle.sound()); // Polle says Wuf
 console.log(garfield.getName() +" says " + garfield.sound()); // Garfield says Meow
 
+// 7. Attempt changing sound method on Dog
+pets.Dog.prototype.sound = function(){ return "Jeg kan snakke!"; }
+console.log(polle.getName() +" says " + polle.sound());
+console.log(polle, Object.isFrozen(polle.prototype));
+
+// 8. Pet counter
+console.log(polle.counter);
 </script>
