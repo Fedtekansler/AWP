@@ -12,7 +12,8 @@
 <script type="text/javascript">
 /* Pet class*/
 function Pet(name){
-	this.name = name;
+	var name = name; // "Private" variable since it's only visible in the scope of this constructor
+	this.getName = function(){ return name; }; // Unfortunately the private variable is also not visible from the prototype which means we must define the getter on each object rather than the prototype of the object.
 }
 
 /* Dog class*/
@@ -36,7 +37,7 @@ Cat.prototype.sound = function(){
 /*Try things out*********************************/
 var polle = new Dog("Polle");
 var garfield = new Cat("Garfield");
-console.log(polle.name +" says " + polle.sound()); // Polle says Wuf
-console.log(garfield.name +" says " + garfield.sound()); // Garfield says Meow
+console.log(polle.getName() +" says " + polle.sound()); // Polle says Wuf
+console.log(garfield.getName() +" says " + garfield.sound()); // Garfield says Meow
 
 </script>
