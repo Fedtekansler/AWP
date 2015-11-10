@@ -6,9 +6,30 @@
 </head>
 <body>
     <h1>Exercise 2.3 - Dynamically Loaded Content</h1>
+    <p>Assignment: <br>
+        (Dynamically loaded content.) As mentioned in the lecture, there are several ways to load content dynamically from JavaScript programs: <br>
+        1) using the XMLHttpRequest object, <br>
+        2) using dynamically generated 'iframe' elements, <br>
+        3) using dynamically generated 'script' tags (see JSONP). <br>
+        Discuss pros and cons of these three techniques. <br>
+    </p>
+
+    <h3>2.3.1 XMLHttpRequest</h3>
+    <h5>Pros</h5>
+    <p>It has all the good principles from AJAX. AJAX is a combination of technologies to load dynamic content. The interactivity between elements gets delegated in a nice readable way, and content that takes a while to read can be loaded in at any time. </p>
+    <h5>Cons</h5>
+    <p>Handling the output object might differ on the browser, so you have to provide extra code to support eg. Microsofts older versions by using ActiveX. There has to be a way to reexecute the code as it is based on Javascript. Buttons that start a new requests are a way to bypass it. </p>
+
+    <h3>2.3.2 Iframe</h3>
+    <h5>Pros</h5>
+    <p>Used by eg. YouTube to allow developers to easily embed videos on their site. The frame can be created with specified dimensions and a set of properties. Most of the time you do not have to think too much on the output, as the frame is loaded with content from the source's site. </p>
+    <h5>Cons</h5>
+    <p>Back in the day iframes were poorly supported by browsers that are not Firefox, Safari or Explorer. Many firewalls protect against iframes as they have been ways of loading virus and other malware in the past. Extra code has to be added to support these browsers. Content stored in iframes might load slower than the main site, which can cause output issues.</p>
+
+    <h3>2.3.3 Script tags</h3>
+    <h5>Pros</h5>
+    <p>We saw first-hand in Exercise 1.3 that this can be used to load content, when other options are blocked for security reasons. </p>
+    <h5>Cons</h5>
+    <p>Like the cons of XMLHttpRequest we have to reexecute it. Furthermore any Javascript that set up eg. listeners might have to be added again to support the new code. Loading a script from another developers site will give them access to your site yielding security ricks.</p>
 </body>
 </html>
-
-<script type="text/javascript">
-
-</script>
