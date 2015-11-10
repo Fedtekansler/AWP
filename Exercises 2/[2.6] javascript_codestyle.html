@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Exercises 2.6 - Code Style</title>
 </head>
 <body>
-
+    <h1>Exercises 2.6 - Code Style</h1>
+    <p>
+        We have run our code through the specified linters. Here are some observations. <br>
+        <br>
+        JSLint reported "Use spaces instead of tabs" multiple times. It was only warnings, and it was primarily related to lines with comments or indented lines (which makes it a lot). <br>
+        JSHint reported warnings like the following "Use '!==' to compare with 'null'." and reported unused functions (these are called by HTML but we only added the Javascript). <br>
+        Google's Closure Linter reported multiple "Illegal tab in comment" and "Missing semicolon after function assigned to a variable". On one file we got 107 errors. That is a lot for code that seems to work perfectly. <br>
+        ESLint had a lot of nice configuration making it possible to get rid of a lot of the indentation issues shown with the other linters. The only type of errors we saw here was "Parsing error: Unexpected token <".
+    </p>
 </body>
 </html>

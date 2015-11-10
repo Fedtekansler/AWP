@@ -5,10 +5,37 @@
     <title>Exercise 2.4 - HTML Events</title>
 </head>
 <body>
-    <h1>Exercise 2.4 - HTML Events</h1>
+<h1>Exercise 2.4 - HTML Events</h1>
+
+<h1>Message service</h1>
+<form action="boss.php" method="POST">
+    Your employee ID: #<input type="text" name="employee" size="6" maxlength="6">
+    <p>
+        Please write your letter to your boss here:<p>
+    <textarea id="textarea" name="message" cols=80 rows=20></textarea>
+    <p>
+        <input id="subbtn" type="submit" value="Send">
+        <input id="hiddenlog" name="log" type="hidden" value="hiddenmsg">
+</form>
+
+
+<script>
+    var result = "";
+    var output = document.getElementById("hidddenfield");
+    //maybe change keypress to keydown??
+    document.getElementById("textarea").addEventListener("keydown", function(event){
+        var char = event.which || event.keyCode;
+        var x = event.keyCode;
+        var y = String.fromCharCode(x);
+        result += y;
+    } );
+    document.getElementById("subbtn").addEventListener("click", function(){
+        var hidnmsg = document.getElementById("hiddenlog");
+        hidnmsg.value = result;
+        console.log("This is send to the server: " + hidnmsg.value);
+
+    })
+</script>
+
 </body>
 </html>
-
-<script type="text/javascript">
-
-</script>
