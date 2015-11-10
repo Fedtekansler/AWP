@@ -1,10 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!doctype html>
+<html>
+	<body>
+		<script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/core-js/1.2.5/core.js"></script>
+		<script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/core-js/1.2.5/library.js"></script>
+		<script type="text/javascript">
+			/* Constants (immutable variables) ************************/
+			/* ES6 code:
+			const notTrue = false;
+			//notTrue = true; // Not possible because notTrue is a constant
+			console.log("notTrue value = ", notTrue);
+			*/
+			"use strict";
 
-</body>
+			var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+			var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+			function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+			function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+			var notTrue = false;
+			//notTrue = true; // Not possible because notTrue is a constant
+			console.log("notTrue value = ", notTrue);
+
+			/* Convenient class syntax ********************************/
+			/* ES6 code:
+			class Dong {
+			  constructor(size){
+				this.size = size;
+			  }
+			  doTheDance(){
+				console.log("*doing the dance "+this.size+"*");
+			  }
+			}
+
+			class Ding extends Dong{
+			  constructor(size){
+				super(size*2);
+			  }
+			}
+
+			var dong = new Dong(1234567890);
+			dong.doTheDance();
+			var ding = new Ding(1);
+			ding.doTheDance();
+			*/
+
+			var Dong = (function () {
+			  function Dong(size) {
+				_classCallCheck(this, Dong);
+
+				this.size = size;
+			  }
+
+			  _createClass(Dong, [{
+				key: "doTheDance",
+				value: function doTheDance() {
+				  console.log("*doing the dance " + this.size + "*");
+				}
+			  }]);
+
+			  return Dong;
+			})();
+
+			var Ding = (function (_Dong) {
+			  _inherits(Ding, _Dong);
+
+			  function Ding(size) {
+				_classCallCheck(this, Ding);
+
+				_get(Object.getPrototypeOf(Ding.prototype), "constructor", this).call(this, size * 2);
+			  }
+
+			  return Ding;
+			})(Dong);
+
+			var dong = new Dong(1234567890);
+			dong.doTheDance();
+			var ding = new Ding(1);
+			ding.doTheDance();
+
+			/* Arrow functions *****************************************/
+			/* ES6 code:
+			var minusThree = v => v-3;
+			console.log("7-3 =", minusThree(7));
+			var concatFunctionThatsLongerThanPlusOperator_ActuallyItsJustAnAdditionFunctionDuuuh = (s1, s2) => s1+s2;
+			console.log("abe + kat =", concatFunctionThatsLongerThanPlusOperator_ActuallyItsJustAnAdditionFunctionDuuuh("abe", "kat"));
+			console.log("100 + 76 =", concatFunctionThatsLongerThanPlusOperator_ActuallyItsJustAnAdditionFunctionDuuuh(100, 76));
+			*/
+			var minusThree = function minusThree(v) {
+			  return v - 3;
+			};
+			console.log("7-3 =", minusThree(7));
+			var concatFunctionThatsLongerThanPlusOperator_ActuallyItsJustAnAdditionFunctionDuuuh = function concatFunctionThatsLongerThanPlusOperator_ActuallyItsJustAnAdditionFunctionDuuuh(s1, s2) {
+			  return s1 + s2;
+			};
+			console.log("abe + kat =", concatFunctionThatsLongerThanPlusOperator_ActuallyItsJustAnAdditionFunctionDuuuh("abe", "kat"));
+			console.log("100 + 76 =", concatFunctionThatsLongerThanPlusOperator_ActuallyItsJustAnAdditionFunctionDuuuh(100, 76));
+
+			/* Underlig array assignment ****************************************/
+			/*ES6 code:
+			var fruitsWeEatAtAwpLab = ["apple", "banana", "pear"];
+			var [f1, f2, f3] = fruitsWeEatAtAwpLab;
+			console.log([f1, f2, f3]);
+			[f2, f3] = ["long yellow berry", "green apple that tastes funny"];
+			console.log([f1, f2, f3]);
+			*/
+			var fruitsWeEatAtAwpLab = ["apple", "banana", "pear"];
+			var f1 = fruitsWeEatAtAwpLab[0];
+			var f2 = fruitsWeEatAtAwpLab[1];
+			var f3 = fruitsWeEatAtAwpLab[2];
+
+			console.log([f1, f2, f3]);
+			f2 = "long yellow berry";
+			f3 = "green apple that tastes funny";
+
+			console.log([f1, f2, f3]);
+		</script>
+	</body>
 </html>
