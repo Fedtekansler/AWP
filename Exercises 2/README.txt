@@ -16,6 +16,14 @@ See [2.2] javascript_inheritance_hierarchy.html - open the file for Readme.
 
 See [2.3] javascript_dynamic_content.html - open the webpage for explanation.
 
+# 2.4 Fun with HTML events
+
+See the console when running [2.4] javascript_html_events.html.
+
+# 2.5 ES6 with Babel
+
+See the console when running [2.5] javascript_es6_babel.html.
+
 # 2.6 Code style
 
 See [2.6] javascript_codestyle.html - open webpage for explanations.
