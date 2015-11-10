@@ -6,6 +6,16 @@
 </head>
 <body>
     <h1>Exercises 2.2 - Inheritance Hierachy</h1>
+	<p>
+		1) See code. <br>
+		2) See code. <br>
+		3) See code. <br>
+		4) See code and output in console. <br>
+		5) Yes, see test where 5. is mentioned. <br>
+		6) The name property is private and will only be accesible by calling the superclass on each class. Look for 6. in the code. <br>
+		7) Yes, we have tried to change the sound of the dog. Look for 7. in the code. <br>
+		8) See explanation where Dog.prototype is created.
+	</p>
 </body>
 </html>
 
@@ -20,7 +30,10 @@ var pets = (function(){
 	}
 	Pet.prototype.counter = 0;
 
-	/* Dog class*/
+	/*
+	* 6.
+	* Dog class
+	* */
 	function Dog(name){
 		Pet.call(this, name); // Call superclass "Pet" constructor on this object
 	}
@@ -35,10 +48,15 @@ var pets = (function(){
 	Dog.prototype.sound = function(){
 		return "Wuf";
 	}
-	//Object.freeze(Dog.prototype); // Makes Dog.prototype read-only (disallow changes to methods)
+
+	// 7.
+	Object.freeze(Dog.prototype); // Makes Dog.prototype read-only (disallow changes to methods)
 	//for some reason this has the effect that getName is not added to constructed Dog objects. Dunno why??
 	
-	/* Cat class*/
+	/*
+	* 6.
+	* Cat class
+	*/
 	function Cat(name){
 		Pet.call(this, name);
 	}
@@ -54,18 +72,22 @@ var pets = (function(){
 	}
 })();
 
-/*Try things out*********************************/
-var polle = new pets.Dog("Polle");
-var garfield = new pets.Cat("Garfield");
-//var pet = new pets.Pet("Mr. Impossible"); // The Pet constructor is not exposed from "pets" module
-console.log(polle.getName() +" says " + polle.sound()); // Polle says Wuf
-console.log(garfield.getName() +" says " + garfield.sound()); // Garfield says Meow
+	/*Try things out*********************************/
+	var polle = new pets.Dog("Polle");
+	var garfield = new pets.Cat("Garfield");
 
-// 7. Attempt changing sound method on Dog
-pets.Dog.prototype.sound = function(){ return "Jeg kan snakke!"; }
-console.log(polle.getName() +" says " + polle.sound());
-console.log(polle, Object.isFrozen(polle.prototype));
+	// 5. Uncommenting this will cause a run-time error.
+	//var pet = new pets.Pet("Mr. Impossible"); // The Pet constructor is not exposed from "pets" module
 
-// 8. Pet counter
-console.log(polle.counter);
+	// 4. Testing sound prototype.
+	console.log(polle.getName() +" says " + polle.sound()); // Polle says Wuf
+	console.log(garfield.getName() +" says " + garfield.sound()); // Garfield says Meow
+
+	// 7. Attempt changing sound method on Dog
+	pets.Dog.prototype.sound = function(){ return "Jeg kan snakke!"; }
+	console.log(polle.getName() +" says " + polle.sound());
+	console.log(polle, Object.isFrozen(polle.prototype));
+
+	// 8. Pet counter
+	console.log(polle.counter);
 </script>
