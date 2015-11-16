@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>The Fun Sorting Game</title>
+        <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900" />
+        <link type="text/css" rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1>The Fun Sorting Game</h1>
+
+        <div id="sorting-game">
+            <div class="block">
+                <div class="dropable-area">Drop here</div>
+                <div id="1" draggable="true" class="number-field">1</div>
+            </div>
+            <div class="block active">
+                <div class="dropable-area">Drop here</div>
+                <div id="2" draggable="true" class="number-field">2</div>
+            </div>
+            <div class="block">
+                <div class="dropable-area">Drop here</div>
+                <div id="3" draggable="true" class="number-field">3</div>
+            </div>
+            <div class="block">
+                <div class="dropable-area">Drop here</div>
+                <div id="4" draggable="true" class="number-field">4</div>
+            </div>
+            <div class="block">
+                <div class="dropable-area">Drop here</div>
+                <div id="5" draggable="true" class="number-field">5</div>
+            </div>
+            <div class="block edge active">
+                <div class="dropable-area">Drop here</div>
+            </div>
+        </div>
+        <p class="status">Games played: <output id="gamecount">0</output></p>
+
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+        <script src="client.js"></script>
+    </body>
+</html>
