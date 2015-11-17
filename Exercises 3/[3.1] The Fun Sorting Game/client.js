@@ -28,7 +28,7 @@ function drop(event) {
 
     /* Should only move element if "Drop here" is displayed
      * Update classnames to display new "Drop here".
-     * Update listeners 
+     * Update listeners
      * Append the new element.
      */
     if (parent.className == "block active" || parent.className == "block edge active") {
@@ -37,6 +37,7 @@ function drop(event) {
         attachListeners();
 
         parent.appendChild(document.getElementById(data));
+        console.log(checkWinCondition());
     }
 }
 
@@ -55,3 +56,19 @@ function attachListeners() {
     });
 }
 
+// Return true if game has been won
+function checkWinCondition() {
+    var boolean = true;
+    var numbers = document.querySelectorAll('.block .number-field');
+    var check = -1;
+    [].forEach.call(numbers, function(number) {
+        if (check < parseInt(number.id)) {
+            check = parseInt(number.id);
+        } else {
+            boolean = false;
+        }
+    });
+    return boolean;
+}
+
+// TODO Add more tiles + random sequence.
