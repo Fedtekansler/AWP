@@ -39,12 +39,11 @@ function drop(event) {
 
         parent.appendChild(document.getElementById(data));
         if (checkWinCondition()) {
-            var gamecount = parseInt(document.getElementById("gamecount").innerHTML) + 1;
-            if (gamecount == 1) {
-                localStorage.setItem("gamecount", gamecount);
-            } else {
-                localStorage.setItem("gamecount", parseInt(localStorage.getItem("gamecount")) + 1);
+            var gamecount = parseInt(document.getElementById("gamecount").innerHTML);
+            if (gamecount == 0) {
+                localStorage.setItem("gamecount", 0);
             }
+            localStorage.setItem("gamecount", parseInt(localStorage.getItem("gamecount")) + 1);
             resetTiles();
         }
     }
@@ -82,7 +81,9 @@ function checkWinCondition() {
 
 // Get the games count and setup tiles with random number from 0 - 100.
 function setupTiles() {
-    document.getElementById("gamecount").innerHTML = localStorage.getItem("gamecount");
+    if (localStorage.getItem("gamecount") !== NaN) {
+        document.getElementById("gamecount").innerHTML = localStorage.getItem("gamecount");
+    }
     var tiles = document.querySelectorAll('.block .number-field');
     [].forEach.call(tiles, function(tile) {
         var current = document.getElementById(tile.id);
