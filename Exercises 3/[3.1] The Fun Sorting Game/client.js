@@ -1,4 +1,5 @@
-// On load setup listeners
+// On load setup listeners and tiles.
+setupTiles();
 attachListeners();
 
 // Container for source element.
@@ -37,7 +38,15 @@ function drop(event) {
         attachListeners();
 
         parent.appendChild(document.getElementById(data));
-        console.log(checkWinCondition());
+        if (checkWinCondition()) {
+            var gamecount = parseInt(document.getElementById("gamecount").innerHTML) + 1;
+            if (gamecount == 1) {
+                localStorage.setItem("gamecount", gamecount);
+            } else {
+                localStorage.setItem("gamecount", parseInt(localStorage.getItem("gamecount")) + 1);
+            }
+            resetTiles();
+        }
     }
 }
 
@@ -71,4 +80,29 @@ function checkWinCondition() {
     return boolean;
 }
 
-// TODO Add more tiles + random sequence.
+// Get the games count and setup tiles with random number from 0 - 100.
+function setupTiles() {
+    document.getElementById("gamecount").innerHTML = localStorage.getItem("gamecount");
+    var tiles = document.querySelectorAll('.block .number-field');
+    [].forEach.call(tiles, function(tile) {
+        var current = document.getElementById(tile.id);
+        var number = Math.floor((Math.random() * 100) + 1);
+        current.id = number;
+        current.innerHTML = number;
+    });
+}
+
+
+// Reset the tiles and setting the last tile to be the "Drop here" tile.
+function resetTiles() {
+    var last = document.getElementById("last");
+    var currentActive = document.getElementsByClassName("block active")[0];
+
+    if (last !== currentActive) {
+        currentActive.appendChild(last.childNodes[3]);
+    }
+    last.className = "block edge active";
+    currentActive.className = "block";
+
+    setupTiles();
+}
