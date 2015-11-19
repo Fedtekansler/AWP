@@ -1,0 +1,9 @@
+See experiment here:
+http://jsperf.com/au-awp-gr-8-ex-3-6
+
+We've created two test cases:
+1. Uses getAttribute and setAttribute to get an attribute and increment it by 1.
+2. Uses element properties to get an attribute and increment it by 1.
+
+Outcome:
+Element properties are 600-700 times faster in the browsers we've tested.
