@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Getting started with HTML5 WebSockets</title>
+	</head>
+	<body>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script>
+		var connection = new WebSocket('ws://localhost:8080');
+
+		connection.onopen = function(event) {
+			connection.send("HELLO SERVER");
+		};
+
+		connection.onmessage = function(msg) {
+			var p = document.createElement("p");
+			p.innerHTML = msg.data;
+			document.body.appendChild(p);
+		};
+		</script>
+	</body>
+</html>
