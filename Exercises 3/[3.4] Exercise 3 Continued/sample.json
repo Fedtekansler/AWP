@@ -7,5 +7,11 @@
    "units": 0},
   {"item": "3\" floppy disk",
    "location": "Ada-128",
-   "units": 2448}
+   "units": 2448},
+  {"item": "Sigurd",
+   "location": "Tv2",
+   "units": 1},
+  {"item": "<b><hr>html tags are not escaped<hr><b>",
+   "location": "oooohh..",
+   "units": "qwertyu"}
 ]

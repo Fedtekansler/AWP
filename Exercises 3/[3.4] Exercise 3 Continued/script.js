@@ -1,5 +1,5 @@
 $(function() {
-    loadMap();
+    loadSuppliesAjax("sample.json");
 
     $("#remove").click(function() {
         $("tbody").empty();
@@ -36,6 +36,14 @@ function editRow() {
     });
 }
 
-function loadMap() {
-    // TODO LOAD JSON CONTENT.
+function addSupplies(suppliesJson){
+	for(var i in suppliesJson){
+		var supply = suppliesJson[i];
+		$("tbody").append("<tr><td>"+supply.item+"</td><td>"+supply.location+"</td><td>"+supply.units+"</td></tr>");
+	}
+}
+
+function loadSuppliesAjax(mapPath) {
+	$("tbody").empty();
+    var mapJson = jQuery.getJSON( mapPath, null, addSupplies);
 }
