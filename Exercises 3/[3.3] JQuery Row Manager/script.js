@@ -2,17 +2,14 @@ $(function() {
     $("#remove").click(function() {
         $("tbody").empty();
     });
-    // ...
 
-    //3.4
     $("#new").click(function() {
         //create new row
         $("tbody").append("<tr><td></td><td></td><td></td></tr>");
+        editRow();
     });
 
-    $("td").click(function(){
-        //edit cell
-    });
+    editRow();
 
     $("#hide").change(function() {
         if (this.checked) {
@@ -24,3 +21,15 @@ $(function() {
         }
     });
 });
+
+function editRow() {
+    $("td").click(function(){
+        //edit cell
+        var currentCell = $(this);
+        $(this).html("<input type='textarea' id='cell'>");
+        $("#cell").focus();
+        $("#cell").focusout(function() {
+            currentCell.html($("#cell").val());
+        });
+    });
+}
