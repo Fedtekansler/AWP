@@ -1,65 +1,48 @@
-
 <!doctype html>
 <html>
 <head>
-    <title>jQuery exercise</title>
+    <title>jQuery Row Manager</title>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $("#remove").click(function() {
-                $("tbody").empty();
-            });
-            // ...
-        });
-        //3.4
-        $(function() {
-           $("#new").click(function() {
-               //create new row
-
-           });
-        });
-        $(function(){
-            $("#td").click(function(){
-                //edit cell
-            });
-        });
-    </script>
+    <script type="text/javascript" src="script.js"></script>
     <body>
-<br>
+        <h1>
+            Exercise 3.3 </br></br>
+            The AU Office Supply Inventory Online Service
+        </h1>
+        </br>
+        <p>
+            1. When the user clicks "New", a new row is added to the table</br>
+            2. When hide units is selected, the 3rd column is hidden</br>
+            3. When the user clicks an entry in the table, the content X is replaced
+            with a text input field with value X that immediately receives focus</br>
+            4. On "focusout" on a text input field, the field is replaced by its value as
+            plain text</br>
+            </br>
+            Rules of the game:</br>
+            1. Do not edit the HTML, only the JavaScript code in  &#60;script&#62;...&#60;/script&#62; </br>
+            2. Use jQuery instead of low-level DOM manipulation
+        </p>
 
-<h1>Exercise 3.3 </br> </br>The AU Office Supply Inventory Online Service</h1>
-<br>1. When the user clicks "New", a new row is added to the table</br>
-    2. When is selected, the 3rd column is hidden</br>
-    3. When the user clicks an entry in the table, the content X is replaced
-    with a text input field with value X that immediately receives focus</br>
-    4. On "focusout" on a text input field, the field is replaced by its value as
-    plain text</br>
-    </br>
-Rules of the game:</br>
-1. Do not edit the HTML, only the JavaScript code in  &#60;script&#62;...&#60;/script&#62; </br>
-2. Use jQuery instead of low-level DOM manipulation
-</h3>
+        <h2>Department of Computer Science</h2>
 
-<h2>Department of Computer Science</h2>
-
-<table>
-    <thead>
-    <tr><td>Item</td><td>Location</td><td>Units</td></tr>
-    </thead>
-    <tbody>
-    <tr><td>pen (blue)</td><td>Ada-128</td><td>12</td></tr>
-    <tr><td>Post-it&reg; notes</td><td>Nygaard-234</td><td>0</td></tr>
-    <tr><td>3" floppy disk</td><td>Ada-128</td><td>2448</td></tr>
-    </tbody>
-</table>
-<p>
-    <button id="new">New</button>
-    <button id="remove">Remove all</button>
-    <label><input type="checkbox" id="hide">Hide 'Units'</label>
-</p>
-<p>
-    Click on a field to edit its content.
-
-</body>
+        <table>
+            <thead>
+                <tr><td>Item</td><td>Location</td><td>Units</td></tr>
+            </thead>
+            <tbody>
+                <tr><td>pen (blue)</td><td>Ada-128</td><td>12</td></tr>
+                <tr><td>Post-it&reg; notes</td><td>Nygaard-234</td><td>0</td></tr>
+                <tr><td>3" floppy disk</td><td>Ada-128</td><td>2448</td></tr>
+            </tbody>
+        </table>
+        <p>
+            <button id="new">New</button>
+            <button id="remove">Remove all</button>
+            <label><input type="checkbox" id="hide">Hide 'Units'</label>
+        </p>
+        <p>
+            Click on a field to edit its content.
+        </p>
+    </body>
 </html>
