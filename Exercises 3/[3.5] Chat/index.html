@@ -2,20 +2,114 @@
 <html>
 	<head>
 		<title>Getting started with HTML5 WebSockets</title>
+		
+		<style>
+			#chat{
+				display: none;
+			}
+			
+			#nickname{
+				font-weight: bold;
+				font-style: italic;
+			}
+			
+			#message-list{
+				color: #666666;
+			}
+			
+			#message-list p.system{
+				font-style: italic;
+			}
+			
+			#message-list p.my-message{
+				color: #000033;
+			}
+			
+			#message-list p.my-message .nickname{
+				font-weight: bold;
+			}
+		</style>
 	</head>
 	<body>
 		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
+		<form id="login-form">
+			<label>Nickname</label>
+			<input type="text" name="nickname" placeholder="Enter a nickname" />
+			<input type="submit" value="Join">
+		</form>
+		
+		<div id="chat">
+			<form>
+				<p>You are logged in as <span id="nickname"></span></p>
+				<label>Message</label>
+				<input type="text" name="message" placeholder="Type a message" />
+				<input type="submit" value="Send">
+			</form>
+			
+			<div id="message-list"></div>
+		</div>
+		
 		<script>
 		var connection = new WebSocket('ws://localhost:8080');
+		var nickname = null;
+		
+		$("#login-form").submit(function(event){
+			event.preventDefault();
+			var data = {
+				"type": "login",
+				"nickname": $("input[name='nickname']", this).val()
+			};
+			//JSON.stringify
+			console.log("Logging in", JSON.stringify(data));
+			connection.send(JSON.stringify(data));
+		});
+		
+		$("#chat > form").submit(function(event){
+			event.preventDefault();
+			var messageElement = $("input[name='message']", this);
+			var data = {
+				"type": "speak",
+				"message": messageElement.val()
+			};
+			messageElement.val(""); // Clear input element
+			console.log("Sending message", JSON.stringify(data));
+			connection.send(JSON.stringify(data));
+		});
 
 		connection.onopen = function(event) {
-			connection.send("HELLO SERVER");
+			// Could notify the user that a connection to the server has been established or whatever..
 		};
 
-		connection.onmessage = function(msg) {
-			var p = document.createElement("p");
-			p.innerHTML = msg.data;
-			document.body.appendChild(p);
+		connection.onmessage = function(rawMsg) {
+			console.log("Received msg", rawMsg.data);
+			var msg = JSON.parse(rawMsg.data);
+			switch(msg.type){
+				case "login-successful":
+					nickname = msg.nickname;
+					$("#nickname").text(msg.nickname);
+					$("#login-form").hide();
+					$("#chat").show();
+					break;
+				case "nickname-unavailable":
+					alert("The nickname \""+msg.nickname+"\" is unavailable");
+					break;
+				case "chatter-joined":
+					$("#message-list").append('<p class="system">'+msg.nickname+' joined!</p>');
+					break;
+				case "chatter-left":
+					$("#message-list").append('<p class="system">'+msg.nickname+' left...</p>');
+					break;
+				case "speak":
+					var p = document.createElement("p");
+					var isOwnMessage = msg.nickname == nickname;
+					var visibleNickname = isOwnMessage ? "Me" : msg.nickname;
+					var className = isOwnMessage ? "my-message" : "";
+					p.innerHTML = visibleNickname + ": "+msg.message;
+					$("#message-list").append('<p class="'+className+'"><span class="nickname">'+visibleNickname+'</span>: '+msg.message+'</p>');
+					break;
+			}
 		};
 		</script>
 	</body>
