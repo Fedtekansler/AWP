@@ -9,6 +9,7 @@ var server = http.createServer(function(req, res) {
 	res.end();
 });
 server.listen(port);
+console.log("Started websocket server on port "+port);
 
 var wsServer = new WebSocketServer({ httpServer: server });
 wsServer.on("request", function(request) {
