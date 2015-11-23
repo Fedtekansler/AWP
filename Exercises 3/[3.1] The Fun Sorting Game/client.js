@@ -44,6 +44,7 @@ function drop(event) {
                 localStorage.setItem("gamecount", 0);
             }
             localStorage.setItem("gamecount", parseInt(localStorage.getItem("gamecount")) + 1);
+			alert("Congratulations! You've beat the game.");
             resetTiles();
         }
     }
@@ -70,7 +71,7 @@ function checkWinCondition() {
     var numbers = document.querySelectorAll('.block .number-field');
     var check = -1;
     [].forEach.call(numbers, function(number) {
-        if (check < parseInt(number.id)) {
+        if (check <= parseInt(number.id)) {
             check = parseInt(number.id);
         } else {
             boolean = false;
@@ -81,9 +82,7 @@ function checkWinCondition() {
 
 // Get the games count and setup tiles with random number from 0 - 100.
 function setupTiles() {
-    if (localStorage.getItem("gamecount") !== NaN) {
-        document.getElementById("gamecount").innerHTML = localStorage.getItem("gamecount");
-    }
+    document.getElementById("gamecount").innerHTML = localStorage.getItem("gamecount") || 0;
     var tiles = document.querySelectorAll('.block .number-field');
     [].forEach.call(tiles, function(tile) {
         var current = document.getElementById(tile.id);
