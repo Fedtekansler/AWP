@@ -6,7 +6,11 @@ angular.module('components', [])
     .directive('rating', function(){
         return{
             restrict: 'E',
-            template: '<span> &#9733; </span>'
+            scope:{
+                //why can't i bind my stars?
+               stars:'bind'
+            },
+            templateUrl: 'partials/Stars.html'
         }
     });
 
