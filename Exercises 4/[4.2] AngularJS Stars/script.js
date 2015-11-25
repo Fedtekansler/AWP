@@ -10,7 +10,7 @@ function starControl() {
 
 function starRating() {
     return {
-        templateUrl: 'partials/stars.html', // A template is loaded with tags defined in link.
+        templateUrl: 'template/stars.html', // A template is loaded with tags defined in link.
         scope: {
             ratingValue: '=ngModel',
             max: '=?' // Max is set in the given template to 5
