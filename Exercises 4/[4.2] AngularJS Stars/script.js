@@ -3,7 +3,7 @@ angular.module('starExample', [])
     .directive('rating', starRating);
 
 function starControl() {
-    this.rating = 5;
+    this.rating = 3;
 }
 
 function starRating() {
@@ -12,6 +12,7 @@ function starRating() {
         templateUrl: 'partials/stars.html',
         controller: 'ctrl',
         scope: {
+            ratingValue: '=ngModel',
             max: '=?' // optional (default is 5)
         },
         link: function(scope, element, attributes, ctrl) {
@@ -22,9 +23,15 @@ function starRating() {
             scope.stars = new Array(5);
 
             scope.toggle = function(index) {
-                console.log(index);
-                console.log(ctrl.rating);
+                //console.log(index);
+                //console.log(scope.ratingValue);
+                scope.ratingValue = index + 1;
             }
+
+            scope.$watch('ratingValue', function(newValue, oldValue) {
+                console.log("Old value is " + oldValue);
+                console.log("New value is " + newValue);
+            });
         }
     };
 }
