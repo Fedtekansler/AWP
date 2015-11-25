@@ -1,7 +1,3 @@
 <ul class="rating">
-    <li ng-click="toggle($index)"> &#9733; </li>
-    <li ng-click="toggle($index)"> &#9733; </li>
-    <li ng-click="toggle($index)"> &#9733; </li>
-    <li ng-click="toggle($index)"> &#9733; </li>
-    <li ng-click="toggle()"> &#9733; </li>
+    <li ng-repeat="star in stars track by $index" ng-click="toggle($index)"> &#9733; </li>
 </ul>

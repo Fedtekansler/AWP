@@ -6,8 +6,10 @@ function starRating() {
     return {
         templateUrl: 'partials/stars.html',
         link: function(scope, element, attributes) {
+            scope.stars = new Array(5);
+
             scope.toggle = function(index) {
-                console.log("On click works");
+                console.log(index);
             }
         }
     };
