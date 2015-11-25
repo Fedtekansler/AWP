@@ -4,6 +4,11 @@ angular.module('starExample', [])
 function starRating() {
     console.log("Hello World");
     return {
-        templateUrl: 'partials/stars.html'
+        templateUrl: 'partials/stars.html',
+        link: function(scope, element, attributes) {
+            scope.toggle = function(index) {
+                console.log("On click works");
+            }
+        }
     };
 }
