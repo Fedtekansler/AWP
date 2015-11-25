@@ -6,4 +6,9 @@ ul {
 
 li {
     display: inline;
+    cursor: pointer;
+}
+
+.filled {
+    color: #fd0;
 }
