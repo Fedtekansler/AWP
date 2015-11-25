@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
     <title>AngularJS Stars</title>
 </head>
-<body ng-app="starExample">
+<body ng-app="starExample" ng-controller="ctrl as rating">
     <h1>4.2 AngularJS Star Rating</h1>
-    <p>Rating is ...</p>
+    <p><strong>Rating:</strong> {{rating.rating}}</p>
     <rating stars="3" max="5"/>
 </body>
 </html>
