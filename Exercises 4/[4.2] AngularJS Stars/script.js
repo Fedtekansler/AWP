@@ -27,7 +27,7 @@ function starRating() {
             }
 
             scope.toggle = function(index) {
-                // This function is attached as an onclick, where add one to make up for the index.
+                // This function is attached as an onclick, where we add one to make up for the index.
                 scope.ratingValue = index + 1;
             };
 
