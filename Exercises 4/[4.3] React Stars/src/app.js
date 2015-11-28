@@ -13,13 +13,10 @@ var Rating = React.createClass({
 	},
 	render: function() {
 		var starElements = [];
+		var emptyStar = "☆";
+		var fullStar = "★";
 		for (var i = 1; i <= this.props.max; ++i) {
-			if(i <= this.state.stars){
-				starElements.push(<span onClick={this.handleClick.bind(this, i)}>&#9733;</span>);
-			}
-			else{
-				starElements.push(<span onClick={this.handleClick.bind(this, i)}>&#9734;</span>);
-			}
+			starElements.push(<span onClick={this.handleClick.bind(this, i)}>{i <= this.state.stars ? fullStar : emptyStar}</span>);
 		}
 		return <div className="rating">{starElements}</div>;
 	}
