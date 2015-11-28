@@ -1,31 +1,38 @@
 var Rating = React.createClass({
 	getInitialState: function() {
-		return {stars: 0};
+		if(this.props.onRatingChange){
+			this.props.onRatingChange(this.props.stars); // Trigger initial ratingChange event
+		}
+		return {stars: this.props.stars || 0};
 	},
-	handleChange: function(event) {
-		//this.setState({name: event.target.value});
+	handleClick: function(rating, event) {
+		this.setState({stars: rating});
+		if(this.props.onRatingChange){
+			this.props.onRatingChange(rating);
+		}
 	},
 	render: function() {
 		var starElements = [];
-		var currentRating = this.state.stars || this.props.stars
-		for (var i = 1; i <= this.props.max; i++) {
-			if(i <= currentRating){
-				starElements.push(<span>&#9733;</span>);
+		for (var i = 1; i <= this.props.max; ++i) {
+			if(i <= this.state.stars){
+				starElements.push(<span onClick={this.handleClick.bind(this, i)}>&#9733;</span>);
 			}
 			else{
-				starElements.push(<span>&#9734;</span>);
+				starElements.push(<span onClick={this.handleClick.bind(this, i)}>&#9734;</span>);
 			}
 		}
-		return <div>{starElements}</div>;
-		/*return <div>
-			Please enter your name here: <input value={this.state.name} onChange={this.handleChange}/>
-			<p>Hello {this.state.name || 'stranger'}!</p>
-		</div>;*/
+		return <div className="rating">{starElements}</div>;
 	}
 });
 
+/* External event handler for when rating changes. */
+function ratingChanged(rating){
+	console.log("Rating changed to "+rating);
+	document.getElementById("current-rating").innerHTML = rating;
+}
+
 ReactDOM.render(
-  <Rating stars="3" max="5" />,
-  document.getElementById("container")
+	<Rating stars="3" max="5" onRatingChange={ratingChanged} />,
+	document.getElementById("container")
 );
 
