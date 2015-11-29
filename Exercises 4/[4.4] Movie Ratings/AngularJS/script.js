@@ -4,7 +4,6 @@ angular.module('starExample', [])
 
 // The controller defined for the body element of the module.
 function starControl($scope, $http) {
-    // The starting rating is set to 3.
     $http.get("movies.json").then(function(response) {
         $scope.movies = response.data.movies;
     });
@@ -14,10 +13,12 @@ function starRating() {
     return {
         templateUrl: 'template/stars.html', // A template is loaded with tags defined in link.
         scope: {
+            restrict: "E",
             ratingValue: '=ngModel',
             max: '=?' // Max is set in the given template to 5
         },
         link: function(scope, element, attributes) {
+
             // We go through a loop up to max to add number of stars and color the stars depending on rating value.
             function update() {
                 scope.stars = [];

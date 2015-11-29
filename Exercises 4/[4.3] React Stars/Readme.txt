@@ -10,4 +10,4 @@ npm install --save react react-dom babelify babel-preset-react
 
 [Build app]
 browserify -t [ babelify --presets [ react ] ] src/app.js -o build/app.js
-(or just click build.bat)
+(or just click build.bat, if you are running a Mac you need to create the build folder.)

@@ -10,10 +10,9 @@
 <body ng-app="starExample" ng-controller="ctrl as rating">
     <h1>Exercise 4.4 AngularJS Movie Rating</h1>
     <div id="movieContainer" ng-repeat="x in movies">
-        <h1>{{x.title}}</h1>
+        <h1>{{x.title}}</h1> <rating stars="{{x.rating}}" max="5"/>
         <p>{{x.length}} minutes</p>
         <p>{{x.description}}</p>
     </div>
-    <rating ng-model="rating.rating" stars="3" max="5"/>
 </body>
 </html>
