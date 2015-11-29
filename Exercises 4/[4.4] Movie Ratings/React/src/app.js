@@ -73,3 +73,4 @@ movies = [
 		}
 	];
 displayMovies(movies, document.getElementById("container"));
+
