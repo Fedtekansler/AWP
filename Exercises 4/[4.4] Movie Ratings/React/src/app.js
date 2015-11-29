@@ -1,7 +1,3 @@
-var movieData = require('./movies.json');
-
-console.log(movieData.movies[0].title);
-
 var Rating = React.createClass({
     getInitialState: function() {
         if(this.props.onRatingChange){
@@ -26,14 +22,55 @@ var Rating = React.createClass({
     }
 });
 
-/* External event handler for when rating changes. */
-function ratingChanged(rating){
-    console.log("Rating changed to "+rating);
-    document.getElementById("current-rating").innerHTML = rating;
+var Movie = React.createClass({
+    getInitialState: function() {
+        return {
+			title: this.props.title || "", 
+			length: this.props.length || 0, 
+			rating: this.props.rating || 0, 
+			description: this.props.description || ""
+		};
+    },
+    render: function() {
+		//<Rating stars="3" max="5" onRatingChange={ratingChanged} />
+        return 	<div className="movie">
+					<h1>{this.state.title}&nbsp;</h1>
+					<Rating stars={this.state.rating} max="5"/>
+					<p className="length">{this.state.length} minutes</p>
+					<p className="description">{this.state.description}</p>
+				</div>
+    }
+});
+
+function loadMovies(){
+	return [
+		{
+		  "title": "Spectre",
+		  "length": 148,
+		  "rating": 4,
+		  "description": "A cryptic message from Bond's past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit toreveal the terrible truth behind SPECTRE."
+		},
+		{
+		  "title": "Borat",
+		  "length": 136,
+		  "rating": 5,
+		  "description": "A highly intelligent individual bangs his retarded cousin and travels to America with a goat."
+		}
+	];
 }
 
-ReactDOM.render(
-<Rating stars="3" max="5" onRatingChange={ratingChanged} />,
-    document.getElementById("container")
-);
+function displayMovies(movies, container){
+	var movieComponents = [];
+	
+	for(var i = 0; i < movies.length; i++){
+		movieComponents.push(<Movie title={movies[i].title} length={movies[i].length} rating={movies[i].rating} description={movies[i].description} />);
+	}
+	
+	ReactDOM.render(
+		<div>{movieComponents}</div>,
+		container
+	);
+}
 
+// Start things..
+displayMovies(loadMovies(), document.getElementById("container"));

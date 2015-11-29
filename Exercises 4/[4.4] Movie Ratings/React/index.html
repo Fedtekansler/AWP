@@ -5,15 +5,29 @@
     <title>Exercise [4.4] React Movie Rating</title>
 
     <style>
+		.movie h1{
+			display:inline;
+		}
+		.movie .rating{
+            display:inline;
+        }
+		
+		.movie .length{
+			font-size:90%;
+		}
+		
+		.movie{
+			border-bottom: 1px solid #ccc;
+		}
+	
         .rating span{
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>4.4 React Movie Rating</h1>
-    <p><strong>Rating: </strong><span id="current-rating"/></p>
     <div id="container"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
