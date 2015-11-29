@@ -1,3 +1,4 @@
+/* Rating component (unchanged from previous exercise) */
 var Rating = React.createClass({
     getInitialState: function() {
         if(this.props.onRatingChange){
@@ -22,28 +23,42 @@ var Rating = React.createClass({
     }
 });
 
+/* Movie component */
 var Movie = React.createClass({
     getInitialState: function() {
         return {
-			title: this.props.title || "", 
-			length: this.props.length || 0, 
-			rating: this.props.rating || 0, 
-			description: this.props.description || ""
+			movie: this.props.movie || {}
 		};
     },
+	updateRating: function(rating){
+		this.props.movie.rating = rating;
+		console.log("Rating changed: ", movies);
+	},
     render: function() {
-		//<Rating stars="3" max="5" onRatingChange={ratingChanged} />
         return 	<div className="movie">
-					<h1>{this.state.title}&nbsp;</h1>
-					<Rating stars={this.state.rating} max="5"/>
-					<p className="length">{this.state.length} minutes</p>
-					<p className="description">{this.state.description}</p>
+					<h1>{this.state.movie.title}&nbsp;</h1>
+					<Rating stars={this.state.movie.rating} max="5" onRatingChange={this.updateRating}/>
+					<p className="length">{this.state.movie.length} minutes</p>
+					<p className="description">{this.state.movie.description}</p>
 				</div>
     }
 });
 
-function loadMovies(){
-	return [
+function displayMovies(movies, container){
+	var movieComponents = [];
+	
+	for(var i = 0; i < movies.length; i++){
+		movieComponents.push(<Movie movie={movies[i]} />);
+	}
+	
+	ReactDOM.render(
+		<div>{movieComponents}</div>,
+		container
+	);
+}
+
+// Start things..
+movies = [
 		{
 		  "title": "Spectre",
 		  "length": 148,
@@ -57,20 +72,4 @@ function loadMovies(){
 		  "description": "A highly intelligent individual bangs his retarded cousin and travels to America with a goat."
 		}
 	];
-}
-
-function displayMovies(movies, container){
-	var movieComponents = [];
-	
-	for(var i = 0; i < movies.length; i++){
-		movieComponents.push(<Movie title={movies[i].title} length={movies[i].length} rating={movies[i].rating} description={movies[i].description} />);
-	}
-	
-	ReactDOM.render(
-		<div>{movieComponents}</div>,
-		container
-	);
-}
-
-// Start things..
-displayMovies(loadMovies(), document.getElementById("container"));
+displayMovies(movies, document.getElementById("container"));
