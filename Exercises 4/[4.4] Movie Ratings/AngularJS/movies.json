@@ -1,10 +1,16 @@
 {
   "movies": [
-    {
-      "title": "Spectre",
-      "length": 148,
-      "rating": 4,
-      "description": "A cryptic message from Bond's past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit toreveal the terrible truth behind SPECTRE."
-    }
-  ]
+		{
+		  "title": "Spectre",
+		  "length": 148,
+		  "rating": 4,
+		  "description": "A cryptic message from Bond's past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit toreveal the terrible truth behind SPECTRE."
+		},
+		{
+		  "title": "Borat",
+		  "length": 136,
+		  "rating": 5,
+		  "description": "A highly intelligent individual bangs his retarded cousin and travels to America with a goat."
+		}
+	]
 }

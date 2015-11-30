@@ -4,6 +4,7 @@ angular.module('starExample', [])
 
 // The controller defined for the body element of the module.
 function starControl($scope, $http) {
+	$scope.movies = [];
     $http.get("movies.json").then(function(response) {
         $scope.movies = response.data.movies;
     });
@@ -12,8 +13,7 @@ function starControl($scope, $http) {
 function starRating() {
     return {
         templateUrl: 'template/stars.html', // A template is loaded with tags defined in link.
-        scope: {
-            restrict: "E",
+		scope: {
             ratingValue: '=ngModel',
             max: '=?' // Max is set in the given template to 5
         },
