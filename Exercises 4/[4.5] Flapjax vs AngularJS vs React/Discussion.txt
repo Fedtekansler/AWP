@@ -1,8 +1,0 @@
-*1* Discuss similarities and differences between Flapjax, AngularJS and React. ***
-
-
-
-*2* Reflect on the AngularJS and React versions of your rating tags ***
-
-
-*3* Reflect on thetwo implementations of the ResearchGroups example from the lectures (or your implementations from exercise 4). ***
