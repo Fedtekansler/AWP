@@ -1,5 +1,9 @@
 var multiset = [];
 
+function clear(){
+	multiset = [];
+}
+
 function add(element, occurences) {	
 	// Return if 0 occurences should be added.
 	if (occurences == 0) { 

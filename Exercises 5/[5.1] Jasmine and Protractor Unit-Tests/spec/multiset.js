@@ -3,15 +3,18 @@ describe("Multiset", function() {
   var song;
 
   beforeEach(function() {
-    player = new Player();
-    song = new Song();
+    clear();
   });
 
-  it("should be able to play a Song", function() {
+  it("should be able to add and count elements", function() {
     add("John John", 2);
-
-    //demonstrates use of custom matcher
     expect(count("John John")).toEqual(2);
+  });
+  
+  it("should be able to remove elements", function() {
+    add("John John", 2);
+	removeIt("John John", 1);
+    expect(count("John John")).toEqual(1);
   });
 });
 
