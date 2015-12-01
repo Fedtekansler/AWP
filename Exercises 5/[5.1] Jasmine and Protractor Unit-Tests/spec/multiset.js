@@ -1,4 +1,21 @@
-describe("Player", function() {
+describe("Multiset", function() {
+  var player;
+  var song;
+
+  beforeEach(function() {
+    player = new Player();
+    song = new Song();
+  });
+
+  it("should be able to play a Song", function() {
+    add("John John", 2);
+
+    //demonstrates use of custom matcher
+    expect(count("John John")).toEqual(2);
+  });
+});
+
+/*describe("Multiset", function() {
   var player;
   var song;
 
@@ -55,4 +72,4 @@ describe("Player", function() {
       }).toThrowError("song is already playing");
     });
   });
-});
+});*/

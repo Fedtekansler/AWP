@@ -15,7 +15,6 @@ function add(element, occurences) {
 		};
 	}
 
-	document.getElementsByName("addOutput")[0].value = "true";
 	console.log('Adding');
 	console.log(multiset);
 	return true;
@@ -42,7 +41,6 @@ function removeIt(element, occurences) {
 		};
 	}	
 
-	document.getElementsByName("removeOutput")[0].value = "true";
 	console.log('Removing');
 	console.log(multiset);
 	return true;
@@ -61,7 +59,6 @@ function count(element) {
 		} 
 	}
 
-	document.getElementsByName("countOutput")[0].value = count;
 	return count;
 }
 
@@ -78,7 +75,6 @@ function containsIt(element) {
 		} 
 	}
 
-	document.getElementsByName("containsOutput")[0].value = checkedElement;
 	return checkedElement; 
 }
 
@@ -134,7 +130,6 @@ function toStringIt() {
 
 	res += "]";
 	console.log(res);
-	document.getElementsByName("stringOutput")[0].value = res;
 	return res;
 }
 
