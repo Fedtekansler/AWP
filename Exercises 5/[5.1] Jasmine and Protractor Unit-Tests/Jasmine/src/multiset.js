@@ -9,6 +9,10 @@ function add(element, occurences) {
 	if (occurences == 0) { 
 		return;
 	}
+	
+	if(occurences < 0){
+		throw Error("cannot add a negative number of elements");
+	}
 
 	// If only one occurence should be added if will be used.
 	if (typeof occurences === 'undefined') {
