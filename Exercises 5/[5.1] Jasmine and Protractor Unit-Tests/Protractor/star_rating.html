@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="script.js"></script>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>AngularJS Stars</title>
+</head>
+<body ng-app="starExample" ng-controller="ctrl as rating">
+    <h1>4.2 AngularJS Star Rating</h1>
+    <p><strong>Rating:</strong> {{rating.rating}}</p>
+    <rating ng-model="rating.rating" stars="3" max="5"/>
+</body>
+</html>

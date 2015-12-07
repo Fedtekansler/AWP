@@ -1,7 +1,9 @@
-describe('Protractor Demo App', function() {
-    it('should have a title', function() {
-        browser.get('http://juliemr.github.io/protractor-demo/');
+describe('Star Rating Test', function() {
+    beforeEach(module('starExample'));
 
+    it('should have a clickable star', function() {
         expect(browser.getTitle()).toEqual('Super Calculator');
+
+        expect(browser.getTime().toEqual('2000'));
     });
 });
