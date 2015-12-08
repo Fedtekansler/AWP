@@ -9,4 +9,5 @@ webdriver-manager start
 
 # Run protractor tests
 # Note: Page to be tested (/app/index.html) must be accessible at http://localhost/AWP/Exercises%205/%5b5.1%5d%20Jasmine%20and%20Protractor%20Unit-Tests/Protractor/app/index.html
+# Alternatively you can fix the baseUrl set in conf.js.
 protractor conf.js
