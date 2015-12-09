@@ -1,13 +1,13 @@
-describe('Row Manager App', function() {
+describe('Angular Star Rating', function() {
     it('should have a title', function() {
         browser.get('index.html');
 
         expect(browser.getTitle()).toEqual('AngularJS Stars');
     });
 	
-	/*it('', function(){
+	it('should have default rating 3', function(){
 		browser.get('index.html');
-		
-		expect();
-	});*/
+		var rating = element.all(by.css('p')).first();
+		expect(rating.getText()).toEqual("Rating: 3");
+	});
 });
