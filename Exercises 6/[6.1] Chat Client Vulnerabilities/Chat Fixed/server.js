@@ -49,6 +49,11 @@ function handleClientMessage(connection, rawMsg){
 	switch(msg.type){
 		case "login":
 			var nickname = msg.nickname;
+			nickname = nickname.replace(/&/g, '&amp;') // Sanitize nickname
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#39;'); 
 			var nicknameIsInUse = connections.some(function(conn){
 				return conn.nickname === nickname;
 			});
@@ -70,9 +75,14 @@ function handleClientMessage(connection, rawMsg){
 			if(msg.message.length <= 0 || !connection.isLoggedIn){
 				return;
 			}
+			var sanitizedMessage = msg.message.replace(/&/g, '&amp;') // Sanitize message
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#39;')
 			connections.forEach(function(conn){
 				if(conn.isLoggedIn){
-					conn.send(JSON.stringify({"type": "speak", "nickname": connection.nickname, "message": msg.message}));
+					conn.send(JSON.stringify({"type": "speak", "nickname": connection.nickname, "message": sanitizedMessage}));
 				}
 			});
 			break;

@@ -88,7 +88,7 @@
 			switch(msg.type){
 				case "login-successful":
 					nickname = msg.nickname;
-					$("#nickname").text(msg.nickname);
+					$("#nickname").html(msg.nickname);
 					$("#login-form").hide();
 					$("#chat").show();
 					break;
