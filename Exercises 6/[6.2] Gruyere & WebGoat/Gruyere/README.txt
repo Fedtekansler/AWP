@@ -1,3 +1,4 @@
+--------------------------------------------------------------------------
 XSS Vulnerability in File upload----------------------------
  - Create file file-upload-xss.html with content <script>alert('poop')</script>
  - Click "Upload" -> upload file.
@@ -9,3 +10,9 @@ The last URL parameter is not properly escaped before printing to the page.
 
 Stored XSS Vulnerability in snippets------------------------
 <b onmouseover="javascript:alert('poop')">DON'T MOUSE OVER THIS</b>
+
+Couldn't find any stored XSS attacks that work via AJAX in chrome.
+
+--------------------------------------------------------------------------
+Client-State Manipulation attacks----------------------------
+To DO..
