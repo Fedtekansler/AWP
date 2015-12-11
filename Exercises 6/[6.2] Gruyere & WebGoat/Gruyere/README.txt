@@ -7,4 +7,5 @@ Reflected XSS Vulnerability on error pages------------------
 http://google-gruyere.appspot.com/161998300381/sdgdfg%3Cscript%3Ealert()%3C/script%3E
 The last URL parameter is not properly escaped before printing to the page.
 
-
+Stored XSS Vulnerability in snippets------------------------
+<b onmouseover="javascript:alert('poop')">DON'T MOUSE OVER THIS</b>
