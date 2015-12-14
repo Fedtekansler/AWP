@@ -60,5 +60,26 @@ http://google-gruyere.appspot.com/977479975090/fedtekansler/deletingSnippet.html
 
 username: fedtekansler
 
+--------------------------------------------------------------------------
+Path Traversal-----------------------------------------------
+
+The principle is that if you know the structure of the file directory, you can steal or even replace files, if they
+are not protected in some way.
+
+Information disclosure---------------------------------------
+
+In the root folder of the code of Gruyere there is a file called secret.txt. You only have to go one folder from the files
+we interact with when using Gruyere. You go one folder up by saying ../, so it is quite simple to access the file, when
+you are logged in:
+
+http://google-gruyere.appspot.com/977479975090/../code/secret.txt
+
+As I see it there is an error in guide, as they think the file should be located at /../secret.txt (or is this just example code?)
+
+Data tampering-----------------------------------------------
+
+I have had problems changing the file. I have created a user called ../code and uploaded a new secret.txt file. As I see
+it, it should overwrite the existing file, since I can see that it is there with command from the previous assingment.
+
 
 
