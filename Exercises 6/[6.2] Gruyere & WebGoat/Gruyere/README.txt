@@ -45,3 +45,20 @@ Then it will be read from left to right and validate the username even though it
 Creating an account like that would give you access to Mensura, which has admin privileges. It can be solved by querying
 the database, when it needs to check the rights of a user, or it can be stored in a temporary cookie that runs out after some time.
 
+--------------------------------------------------------------------------
+Cross-Site Request Forgery (XSRF)----------------------------
+
+The problem is described in the assignment, but essentially hidden elements are executed and use the fact that you might
+be logged in to eg. your Gruyere account. It is then possible to run commands, while you thought you were safe and
+doing something completely different. Uploading a file to Gruyere with the contents:
+
+<img src="http://google-gruyere.appspot.com/977479975090/deletesnippet?index=0" style="display:none;">
+
+will delete the first snippet in your account, if you are logged in. The file can be accessed like this after an upload:
+
+http://google-gruyere.appspot.com/977479975090/fedtekansler/deletingSnippet.html
+
+username: fedtekansler
+
+
+
